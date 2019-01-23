@@ -8,7 +8,7 @@ The script uses following external API's:
 
 If everything is fine, you'll see a new post in your `vk-group` with a random comics:
 
-` screenshot Выделение_027.png`
+![027.png](https://github.com/nicko858/comics_publisher/blob/master/%D0%92%D1%8B%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_027.png)
 
 ### How to install
 Python3 should be already installed.
