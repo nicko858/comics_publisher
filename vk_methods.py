@@ -133,3 +133,5 @@ def get_vk_upload_adress(vk_group_id, access_token):
     return upload_url
 
 
+if __name__ == '__main__':
+    pass
