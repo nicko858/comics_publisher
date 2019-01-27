@@ -63,11 +63,6 @@ def open_img_to_upload(path_to_img):
     return img_file
 
 
-def close_img_file(img_file):
-    file_descriptor = img_file['photo']
-    file_descriptor.close()
-
-
 if __name__ == '__main__':
     load_dotenv()
     app_id = getenv("client_id")
@@ -94,7 +89,6 @@ if __name__ == '__main__':
             upload_url,
             img_to_upload
         )
-        close_img_file(img_to_upload)
         media_id, owner_id = save_img_to_vk(
             access_token,
             uploaded_photo,
@@ -114,6 +108,9 @@ if __name__ == '__main__':
               "Post_id = {}".format(url_comics, vk_group_id, post_id))
     except VkAPIUnavailable as error:
         exit(error)
+    finally:
+        img_to_upload.close()
+
 
 
 

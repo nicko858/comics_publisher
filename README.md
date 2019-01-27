@@ -31,10 +31,14 @@ $ pip install -r requirements.txt
 
 and remember it
 - Create file `.env` in the script directory
-- Add the following records to the `.env-file`:
-   - client_id=`Your application_id`
-   - access_token=`Your access token`
-   - vk_group_id=`Your vk_group_id`
+- Add the following records to the `.env-file`:  
+
+   ```bash
+   client_id=Your application_id
+   access_token=Your access token
+   vk_group_id=Your vk_group_id
+  ```
+ 
 
 ### Project Goals
 

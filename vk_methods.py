@@ -2,6 +2,8 @@ import requests
 from requests import ConnectionError
 from urllib3.exceptions import ResponseError
 
+V = 5.92
+
 
 class VkAPIUnavailable(Exception):
     pass
@@ -19,7 +21,7 @@ def upload_photo_to_vk(url, files):
         photo = content['photo']
         server = content['server']
         hash = content['hash']
-        if not photo or not server or not hash:
+        if not all([photo, server, hash]):
             raise KeyError
         return photo, server, hash
     except KeyError:
@@ -40,7 +42,7 @@ def post_photo_to_vk_wall(
         "message": message,
         "attachments": "photo{}_{}".format(owner_id, media_id),
         "from_group": 1,
-        "v": 5.92,
+        "v": V,
         "access_token": access_token
 
     }
@@ -75,7 +77,7 @@ def save_img_to_vk(access_token, photo, group_id, server, img_hash):
         "photo": photo,
         "server": server,
         "hash": img_hash,
-        "v": 5.92
+        "v": V
     }
     url = "https://api.vk.com/method/photos.saveWallPhoto"
     try:
@@ -107,7 +109,7 @@ def get_vk_upload_adress(vk_group_id, access_token):
         "access_token": access_token,
         "scope": "photos",
         "group_id": vk_group_id,
-        "v": 5.92
+        "v": V
     }
     url = "https://api.vk.com/method/photos.getWallUploadServer"
     try:
