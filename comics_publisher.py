@@ -76,14 +76,16 @@ if __name__ == '__main__':
         ))
         filename = extract_filename_from_url(img_comics_url)
         downloaded_img_path = download_image(img_comics_url, filename)
+        if not downloaded_img_path:
+            exit("No comics downloaded from Xkcd API!\nNothing to post!")
     except XkcdAPIUnavailable as error:
         exit(error)
+    img_to_upload = open_img_to_upload(downloaded_img_path)
     try:
         upload_url = get_vk_upload_adress(
             vk_group_id,
             access_token
         )
-        img_to_upload = open_img_to_upload(downloaded_img_path)
 
         uploaded_photo, server, img_hash = upload_photo_to_vk(
             upload_url,
@@ -103,13 +105,13 @@ if __name__ == '__main__':
             message,
             access_token
         )
-        delete_img_file(downloaded_img_path)
         print("You have successfully posted comics = {} to vk_group_id = {}\n"
               "Post_id = {}".format(url_comics, vk_group_id, post_id))
     except VkAPIUnavailable as error:
         exit(error)
     finally:
-        img_to_upload.close()
+        img_to_upload['photo'].close()
+        delete_img_file(downloaded_img_path)
 
 
 
